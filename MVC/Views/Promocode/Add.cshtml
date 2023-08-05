@@ -1,0 +1,52 @@
+﻿@model MVC.Models.PromocodeAddModel
+
+@{
+    ViewData["Title"] = "Dodawanie kodu";
+}
+<section class="section-padding">
+    <div class="container col-4 mt-5 mb-5 border rounded bg-light p-3">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-header text-center pb-5">
+                    <br><h2>Dodawanie kodu</h2>
+                </div>
+            </div>
+        </div>
+        <div class="text-center">
+            @using (Html.BeginForm("Add", "Promocode"))
+            {
+                <table class="mx-auto">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <label>Id usługi </label><br />
+                                @Html.TextBoxFor(m => m.ProductId, new { @type = "number" })<br />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Kod promocyjny </label><br />
+                                @Html.TextBoxFor(m => m.Code)<br />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Cena zł</label><br />
+                                @Html.TextBoxFor(m => m.Price, new { @type = "number" })<br />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table><br />
+                <input type="submit" value="Dodaj" class="btn btn-dark" />
+                <br />
+                <br />
+            }
+        </div>
+        @if (ViewData["Message"] != null)
+        {
+            <div class="text-center">
+                <p class="text-danger col-12">@ViewData["Message"]</p>
+            </div>
+        }
+    </div>
+</section>

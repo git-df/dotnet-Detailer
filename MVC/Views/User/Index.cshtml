@@ -1,0 +1,111 @@
+﻿@model MVC.Models.UserInfoModel
+
+@{
+    ViewData["Title"] = "Twoje Konto";
+}
+
+<section class="section-padding">
+    <div class="container bg-light">
+        <div class="p-5 row border rounded">
+            <p>Panel użytkownika</p>
+            <header class="pb-5">
+                <div class="row">
+                    <h1 class="col-10">Witaj, @Html.DisplayFor(model => model.FirstName) @Html.HiddenFor(model => model.Id)</h1>
+                    <a asp-controller="Access" asp-action="SignOut" class="btn btn-dark ml-auto col-2 p-3">Wyloguj się</a>
+                </div>
+                <p>@Html.DisplayFor(model => model.Email)</p>
+            </header><br>
+            <table class ="col-12">
+                <tbody>
+                    <tr>
+                        <td class="p-3">
+                            <a class="btn btn-dark col-12 p-4" asp-controller="Order" asp-action="Index">Zamów usługi</a>
+                        </td>
+                        <td class="p-3">
+                            <a class="btn btn-dark col-12 p-4" asp-controller="Order" asp-action="MyOrders">Historia zleceń</a>
+                        </td>
+                        <td class="p-3">
+                            <a class="btn btn-dark col-12 p-4" asp-controller="User" asp-action="Edit">Edytuj dane</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="p-3">
+                            <a class="btn btn-dark col-12 p-4" asp-controller="PriceList" asp-action="UserPriceList">Zobacz swoją ofertę</a>
+                        </td>
+                        <td class="p-3">
+                            <a class="btn btn-dark col-12 p-4" asp-controller="PriceList" asp-action="Index">Zobacz ofertę podstawową</a>
+                        </td>
+                        <td class="p-3">
+                            <a class="btn btn-dark col-12 p-4" asp-controller="User" asp-action="PasswordChange">Zmień hasło</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+@if(Model.Employee != null)
+{
+    <section class="section-padding">
+        <div class="container bg-light">
+            <div class="p-5 row border rounded">
+                <p>Panel pracownika #@Html.DisplayFor(model => model.Employee.Id)</p>
+                <table class="col-12">
+                    <tbody>
+                        <tr>
+                            <td class="p-3">
+                                <a class="btn btn-dark col-12 p-4" asp-controller="Order" asp-action="OrdersToConfirm">Zlecenia do potwierdzenia</a>
+                            </td>
+                            <td class="p-3">
+                                <a class="btn btn-dark col-12 p-4" asp-controller="Order" asp-action="OrdersToDo">Zlecenia do wykonania</a>
+                            </td>
+                            <td class="p-3">
+                                <a class="btn btn-dark col-12 p-4" asp-controller="Order" asp-action="OrdersNoPaid">Zlecenia nie opłacone</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    if(Model.Employee.IsAdmin == true)
+    {
+        <section class="section-padding">
+            <div class="container bg-light">
+                <div class="p-5 row border rounded">
+                    <p>Panel administatora</p>
+                    <table class="col-12">
+                        <tbody>
+                            <tr>
+                                <td class="p-3">
+                                    <a class="btn btn-dark col-12 p-4" asp-controller="Category" asp-action="Index">Kategorie</a>
+                                </td>
+                                <td class="p-3">
+                                    <a class="btn btn-dark col-12 p-4" asp-controller="Product" asp-action="GetProductList">Usługi</a>
+                                </td>
+                                <td class="p-3">
+                                    <a class="btn btn-dark col-12 p-4" asp-controller="Employee" asp-action="Index">Pracownicy</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="p-3">
+                                    <a class="btn btn-dark col-12 p-4" asp-controller="Promocode" asp-action="GetListForAdmin">Kody Promocyjne</a>
+                                </td>
+                                <td class="p-3">
+                                    <a class="btn btn-dark col-12 p-4" asp-controller="Offeruser" asp-action="Index">Promocje użytkowników</a>
+                                </td>
+                                <td class="p-3">
+                                    <a class="btn btn-dark col-12 p-4" asp-controller="Employee" asp-action="Admins">Administratorzy</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    }
+}
+
+

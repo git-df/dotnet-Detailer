@@ -1,0 +1,62 @@
+﻿@model IEnumerable<MVC.Models.CategoryListModel>
+
+@{
+    ViewData["Title"] = "Kategorie";
+}
+<section class="section-padding">
+    <div class="container mt-5 mb-5 border rounded bg-light p-3">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-header text-center pb-5">
+                    <br><h2>Lista kategori</h2><br />
+                    <a class="btn btn-dark" asp-controller="Category" asp-action="AddCategory">Dodaj</a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="col-4">
+                            <p>Id kategori</p>
+                        </th>
+                        <th class="col-6">
+                            <p>Nazwa</p>
+                        </th>
+                        <th class="col-1">
+                            <p>Aktywny</p>
+                        </th>
+                        <th class="col-1">
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var category in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(c => category.Id)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(c => category.Name)
+                            </td>
+                            <td>
+                                @Html.CheckBoxFor(c => category.IsActive)
+                            </td>
+                            <td>
+                                @if (category.IsActive)
+                                {
+                                    <a class="btn btn-dark" asp-controller="Category" asp-action="DeActive" asp-route-id="@category.Id">Dezaktywuj</a>
+                                }
+                                else
+                                {
+                                    <a class="btn btn-dark" asp-controller="Category" asp-action="Active" asp-route-id="@category.Id">Aktywuj</a>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
